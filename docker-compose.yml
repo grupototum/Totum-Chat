@@ -1,0 +1,21 @@
+services:
+  lobe-chat:
+    image: lobehub/lobe-chat:latest
+    container_name: lobe-chat
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.1:3210:3210"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./branding/favicon.ico:/app/public/favicon.ico:ro
+      - ./branding/logo.png:/app/public/logo.png:ro
+      - ./branding/apple-touch-icon.png:/app/public/apple-touch-icon.png:ro
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://127.0.0.1:3210/chat || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s

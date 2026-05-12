@@ -1,0 +1,13 @@
+.env
+.env.local
+.env.*.local
+*.raw
+*.log
+.DS_Store
+node_modules/
+credentials-*.json
+cloudflared/config.yml
+cloudflared/*.json
+data/
+postgres/
+redis/
