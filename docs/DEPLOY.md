@@ -10,8 +10,8 @@
 ## Fresh VPS Bootstrap
 
 ```bash
-git clone https://github.com/grupototum/Totum-Chat.git /opt/totum-chat
-cd /opt/totum-chat
+git clone https://github.com/grupototum/Totum-Chat.git /home/totum/totum-chat
+cd /home/totum/totum-chat
 cp .env.example .env
 ```
 
@@ -36,9 +36,18 @@ Validate:
 ```bash
 curl -I https://chat.grupototum.com
 curl -L https://chat.grupototum.com/chat
-docker inspect -f '{{.State.Health.Status}}' lobe-chat
+docker inspect -f '{{.State.Health.Status}}' totum-chat
 ```
 
-## Production Note From 2026-05-12
+## Production Note From 2026-05-13
 
-Nginx on the Hostinger VPS points `chat.grupototum.com` to `127.0.0.1:3210`, but no container/process was listening on that port at inventory time. Before replacing production, confirm whether Cloudflare is pointing at a different origin or whether another deployment path is serving the current LobeChat instance.
+Nginx on the Hostinger VPS points `chat.grupototum.com` to `127.0.0.1:3210`, but no container/process was listening on that port at inventory time. A forced request to Hostinger returned `502`, while the public Cloudflare route returned HTTP 200. Before replacing production, confirm whether Cloudflare is pointing to another origin or whether a Cloudflare Worker/redirect is serving the current LobeChat instance.
+
+Historical VPS config was found at `/home/totum/totum-chat` with:
+
+- `docker-compose.yml`
+- `.env`
+- `agents-index.json`
+- `public/agents-index.json`
+- `src/alexandria-integration.js`
+- `setup.sh`

@@ -1,12 +1,12 @@
 services:
-  lobe-chat:
+  totum-chat:
     image: lobehub/lobe-chat:latest
-    container_name: lobe-chat
+    container_name: totum-chat
     restart: unless-stopped
-    env_file:
-      - .env
     ports:
       - "127.0.0.1:3210:3210"
+    env_file:
+      - .env
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:

@@ -9,11 +9,21 @@ This repository intentionally stores only reproducible configuration, documentat
 - Public URL: `https://chat.grupototum.com/chat`
 - Expected local upstream on Hostinger: `127.0.0.1:3210`
 - Reverse proxy: Nginx config extracted from `/etc/nginx/conf.d/domains/chat.grupototum.com.conf`
+- VPS config source discovered on 2026-05-13: `/home/totum/totum-chat`
 - Branding source: `/Users/israellemos/Documents/Claude/Projects/Totum OS/branding`
 
 ## Important Finding
 
-On 2026-05-12, the VPS had the Nginx route for `chat.grupototum.com`, but no running Docker container or listening process on port `3210`. The live site still served LobeChat through Cloudflare. Treat this repository as the desired rebuild kit and verify the actual production origin before a cutover.
+On 2026-05-13, forcing `chat.grupototum.com` to the Hostinger IP returned `502 Bad Gateway`, while the public Cloudflare route returned HTTP 200. The Hostinger VPS has a historical config directory at `/home/totum/totum-chat`, but no running process was listening on `127.0.0.1:3210` during inventory. Treat this repository as the rebuild kit and verify Cloudflare origin/DNS before a cutover.
+
+## VPS Files Still To Extract
+
+The following files exist in `/home/totum/totum-chat` and should be versioned in a follow-up once SSH is stable again:
+
+- `agents-index.json`
+- `public/agents-index.json`
+- `src/alexandria-integration.js`
+- `setup.sh`
 
 ## Docs
 
