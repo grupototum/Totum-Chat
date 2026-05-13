@@ -1,22 +1,22 @@
-# Alexandria Plugin
+# Plugin Alexandria
 
-The Alexandria plugin manifest is served by the Supabase Edge Function:
+O manifesto do plugin Alexandria é servido pela Supabase Edge Function:
 
 `https://cgpkfhrqprqptvehatad.supabase.co/functions/v1/alexandria-proxy`
 
-Current public tools:
+Ferramentas públicas atuais:
 
 - `searchAlexandria`
 - `getPop`
 - `getClientBrief`
 
-The internal `/capture` route is intentionally not listed in the public LobeHub manifest because it requires an internal bearer token and is reserved for n8n/server-side workflows.
+A rota interna `/capture` intencionalmente não aparece no manifesto público do Chat Totum porque exige um bearer token interno e fica reservada para fluxos n8n/server-side.
 
-## Register After Deploy
+## Cadastro Depois do Deploy
 
-1. Open `https://chat.grupototum.com/chat`.
-2. Go to plugin/tool settings.
-3. Add custom plugin by manifest URL:
+1. Abra `https://chat.grupototum.com/chat`.
+2. Entre nas configurações de plugins/ferramentas.
+3. Adicione um plugin customizado pela URL do manifesto:
    `https://cgpkfhrqprqptvehatad.supabase.co/functions/v1/alexandria-proxy`
-4. Test with: "Qual é o POP de onboarding da Totum?"
-5. Confirm the plugin returns Alexandria results rather than generic model text.
+4. Teste com: "Qual é o POP de onboarding da Totum?"
+5. Confirme se o plugin retorna resultados da Alexandria em vez de uma resposta genérica do modelo.

@@ -1,13 +1,13 @@
 # Deploy
 
-## Prerequisites
+## Pré-requisitos
 
-- Docker and Docker Compose
-- Nginx with TLS certificates for `chat.grupototum.com`
-- `.env` created from `.env.example`
-- Optional local Ollama available to the container through `host.docker.internal`
+- Docker e Docker Compose
+- Nginx com certificados TLS para `chat.grupototum.com`
+- `.env` criado a partir de `.env.example`
+- Ollama local opcional disponível para o container via `host.docker.internal`
 
-## Fresh VPS Bootstrap
+## Bootstrap de um VPS Novo
 
 ```bash
 git clone https://github.com/grupototum/Totum-Chat.git /home/totum/totum-chat
@@ -15,7 +15,7 @@ cd /home/totum/totum-chat
 cp .env.example .env
 ```
 
-Edit `.env` with real values. Do not commit it.
+Edite o `.env` com valores reais. Não commite esse arquivo.
 
 ```bash
 sh scripts/validate-env.sh .env
@@ -24,7 +24,7 @@ docker compose up -d
 docker compose ps
 ```
 
-Install the Nginx config:
+Instale a configuração do Nginx:
 
 ```bash
 cp nginx/chat.grupototum.com.conf /etc/nginx/conf.d/domains/chat.grupototum.com.conf
@@ -32,21 +32,29 @@ nginx -t
 systemctl reload nginx
 ```
 
-Validate:
+Valide:
 
 ```bash
 sh scripts/validate-env.sh .env
 curl -I https://chat.grupototum.com
 curl -L https://chat.grupototum.com/chat
+curl -I -H 'Accept-Language: en-US,en;q=0.9' https://chat.grupototum.com/chat
 docker inspect -f '{{.State.Health.Status}}' totum-chat
 sh scripts/healthcheck-wrapper.sh https://chat.grupototum.com/chat
 ```
 
-## Production Note From 2026-05-13
+Abra `https://chat.grupototum.com/chat` em uma janela anônima e confirme se a primeira experiência carrega em português do Brasil.
 
-Nginx on the Hostinger VPS points `chat.grupototum.com` to `127.0.0.1:3210`, but no container/process was listening on that port at inventory time. A forced request to Hostinger returned `502`, while the public Cloudflare route returned HTTP 200. Before replacing production, confirm whether Cloudflare is pointing to another origin or whether a Cloudflare Worker/redirect is serving the current LobeChat instance.
+## Nota de Produção de 2026-05-13
 
-Historical VPS config was found at `/home/totum/totum-chat` with:
+O diagnóstico real do `502` foi: Nginx apontava `chat.grupototum.com` para `127.0.0.1:3210`, mas o container `totum-chat` não existia/estava parado. O container foi recriado e validado:
+
+- Local `http://127.0.0.1:3210/chat`: HTTP 200
+- Origem Nginx direta para `chat.grupototum.com/chat`: HTTP 200
+- Público `https://chat.grupototum.com/chat`: HTTP 200
+- `totum-chat`: `healthy`
+
+A configuração de produção vive em `/home/totum/totum-chat` com:
 
 - `docker-compose.yml`
 - `.env`
@@ -55,4 +63,4 @@ Historical VPS config was found at `/home/totum/totum-chat` with:
 - `src/alexandria-integration.js`
 - `setup.sh`
 
-Follow `docs/VPS_EXTRACTION.md` to recover and sanitize those files before declaring this repository a complete production rebuild source.
+O backup diário inclui `/home/totum/totum-chat`, e o healthcheck global monitora o container `totum-chat`.

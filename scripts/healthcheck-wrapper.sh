@@ -27,13 +27,13 @@ req.on('error', () => {
 req.end();
 " "$URL" || true)"
 else
-  echo "Totum Chat healthcheck failed: curl, wget or node is required" >&2
+  echo "Healthcheck do Totum Chat falhou: curl, wget ou node é obrigatório" >&2
   exit 1
 fi
 
 if [ "$status" != "200" ]; then
-  echo "Totum Chat healthcheck failed: HTTP ${status:-unknown} for $URL" >&2
+  echo "Healthcheck do Totum Chat falhou: HTTP ${status:-desconhecido} em $URL" >&2
   exit 1
 fi
 
-echo "Totum Chat healthy: $URL"
+echo "Totum Chat saudável: $URL"

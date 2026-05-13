@@ -1,5 +1,5 @@
 # Cloudflared
 
-This directory keeps a sanitized example only. Do not commit a real `config.yml` or tunnel credentials JSON.
+Este diretório guarda apenas um exemplo sanitizado. Não commite um `config.yml` real nem credenciais JSON de túnel.
 
-The current Hostinger VPS inventory did not find an active Cloudflared config for `chat.grupototum.com`; Nginx is the known reverse proxy. Use this only if the domain is later moved behind a Cloudflare Tunnel.
+O inventário atual do VPS da Hostinger não encontrou uma configuração Cloudflared ativa para `chat.grupototum.com`; o proxy reverso conhecido é o Nginx. Use isto apenas se o domínio for movido para trás de um Cloudflare Tunnel no futuro.

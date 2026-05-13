@@ -1,16 +1,16 @@
 # Branding
 
-Canonical source copied from:
+Fonte canônica copiada de:
 
 `/Users/israellemos/Documents/Claude/Projects/Totum OS/branding`
 
-Files:
+Arquivos:
 
-- `favicon.ico`: copied from `favicon.ico`
-- `logo.png`: copied from `logo-word-256.png`
-- `apple-touch-icon.png`: copied from `logo-mascot-512.png`
+- `favicon.ico`: copiado de `favicon.ico`
+- `logo.png`: copiado de `logo-word-256.png`
+- `apple-touch-icon.png`: copiado de `logo-mascot-512.png`
 
-Verification on 2026-05-12:
+Verificação em 2026-05-12:
 
-- `https://chat.grupototum.com/favicon.ico` matched the canonical local `favicon.ico` SHA-256 exactly.
-- No active VPS branding directory for LobeChat was found during inventory, so local canonical branding is the source of truth.
+- `https://chat.grupototum.com/favicon.ico` bateu exatamente com o SHA-256 do `favicon.ico` canônico local.
+- Nenhum diretório ativo de branding do Chat Totum foi encontrado no VPS durante o inventário; portanto, o branding canônico local é a fonte da verdade.

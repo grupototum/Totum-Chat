@@ -1,6 +1,6 @@
 services:
   totum-chat:
-    image: lobehub/lobe-chat:${LOBE_CHAT_IMAGE_TAG:?Set LOBE_CHAT_IMAGE_TAG in .env to a validated LobeChat release or digest}
+    image: lobehub/lobe-chat:${LOBE_CHAT_IMAGE_TAG:?Defina LOBE_CHAT_IMAGE_TAG no .env com uma release validada do Chat Totum ou um digest}
     container_name: totum-chat
     restart: unless-stopped
     ports:

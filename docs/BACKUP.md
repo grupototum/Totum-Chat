@@ -1,20 +1,20 @@
 # Backup
 
-Back up these items periodically:
+Faça backup destes itens periodicamente:
 
-- VPS `.env` for this service, stored outside git in a secure password manager.
-- Nginx config for `chat.grupototum.com`.
-- Cloudflare tunnel credentials if a tunnel is used.
-- Browser/client-side LobeChat data if users rely on local IndexedDB rather than server-side persistence.
-- Any future database volume if the deployment is moved to server-side LobeChat persistence.
+- `.env` deste serviço no VPS, armazenado fora do Git em um gerenciador de senhas seguro.
+- Configuração Nginx de `chat.grupototum.com`.
+- Credenciais do túnel da Cloudflare, caso um túnel seja usado.
+- Dados do Chat Totum no navegador/client-side, caso os usuários dependam do IndexedDB local em vez de persistência server-side.
+- Qualquer volume de banco futuro, caso o deploy migre para persistência server-side do Chat Totum.
 
-Do not back up secrets into this repository.
+Não faça backup de segredos dentro deste repositório.
 
-Suggested recovery test:
+Teste de recuperação sugerido:
 
-1. Start a new VPS.
-2. Clone this repository.
-3. Restore `.env` from the password manager.
-4. Run `docker compose up -d`.
-5. Reapply Nginx and TLS.
-6. Register the Alexandria plugin again from `docs/PLUGIN_ALEXANDRIA.md`.
+1. Suba um VPS novo.
+2. Clone este repositório.
+3. Restaure o `.env` a partir do gerenciador de senhas.
+4. Rode `docker compose up -d`.
+5. Reaplique Nginx e TLS.
+6. Cadastre novamente o plugin Alexandria seguindo `docs/PLUGIN_ALEXANDRIA.md`.

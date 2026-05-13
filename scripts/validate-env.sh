@@ -4,7 +4,7 @@ set -eu
 ENV_FILE="${1:-.env}"
 
 if [ ! -f "$ENV_FILE" ]; then
-  echo "Missing $ENV_FILE. Copy .env.example to .env and fill real values." >&2
+  echo "$ENV_FILE não encontrado. Copie .env.example para .env e preencha valores reais." >&2
   exit 1
 fi
 
@@ -43,13 +43,13 @@ for key in $required_vars; do
 done
 
 if [ -n "$missing" ]; then
-  echo "Missing required env vars:${missing}" >&2
+  echo "Variáveis obrigatórias ausentes:${missing}" >&2
   exit 1
 fi
 
 if [ -n "$placeholder" ]; then
-  echo "Replace placeholder values before deploy:${placeholder}" >&2
+  echo "Substitua os placeholders antes do deploy:${placeholder}" >&2
   exit 1
 fi
 
-echo "Environment file validated: $ENV_FILE"
+echo "Arquivo de ambiente validado: $ENV_FILE"

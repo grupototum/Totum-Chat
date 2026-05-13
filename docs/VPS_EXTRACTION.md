@@ -1,28 +1,28 @@
-# VPS Extraction Checklist
+# Checklist de Extração do VPS
 
-This repository is not production-complete until the historical files below are recovered from `/home/totum/totum-chat`, sanitized and either versioned or explicitly replaced.
+Este checklist documenta como repetir a extração dos arquivos operacionais de `/home/totum/totum-chat`.
 
-Required inventory:
+Status em 2026-05-13: extração concluída, arquivos versionados e varredura de segredos sem achados reais.
+
+Inventário obrigatório:
 
 - `agents-index.json`
 - `public/agents-index.json`
 - `src/alexandria-integration.js`
 - `setup.sh`
 
-Extraction flow:
+Fluxo de extração:
 
 ```bash
 ssh <vps-user>@<vps-host> 'cd /home/totum/totum-chat && sha256sum agents-index.json public/agents-index.json src/alexandria-integration.js setup.sh'
-scp <vps-user>@<vps-host>:/home/totum/totum-chat/agents-index.json ./agents-index.json
-scp <vps-user>@<vps-host>:/home/totum/totum-chat/public/agents-index.json ./public/agents-index.json
-scp <vps-user>@<vps-host>:/home/totum/totum-chat/src/alexandria-integration.js ./src/alexandria-integration.js
-scp <vps-user>@<vps-host>:/home/totum/totum-chat/setup.sh ./setup.sh
+ssh <vps-user>@<vps-host> 'cd /home/totum/totum-chat && tar -czf - docker-compose.yml agents-index.json public/agents-index.json src/alexandria-integration.js setup.sh nginx-chat.conf' \
+  | tar -xzf - -C /tmp/totum-chat-vps-current
 ```
 
-Before committing, inspect every file for secrets:
+Antes de commitar, inspecione todos os arquivos em busca de segredos:
 
 ```bash
 rg -n "key|token|secret|password|bearer|authorization|apikey|api_key" agents-index.json public src setup.sh
 ```
 
-If any file contains runtime secrets, replace them with environment variables and document the variable in `.env.example`.
+Se algum arquivo contiver segredos de runtime, substitua por variáveis de ambiente e documente a variável em `.env.example`.

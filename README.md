@@ -1,36 +1,37 @@
 # Totum Chat
 
-Deploy configuration for `chat.grupototum.com`, the Totum self-hosted LobeChat/LobeHub instance.
+Configuração de deploy do `chat.grupototum.com`, a instância Chat Totum auto-hospedada da Totum.
 
-This repository intentionally stores only reproducible configuration, documentation and public branding assets. Runtime secrets stay in `.env` on the server and must never be committed.
+Este repositório guarda intencionalmente apenas configuração reproduzível, documentação e assets públicos da marca. Segredos de runtime ficam no `.env` do servidor e nunca devem ser commitados.
 
-## Current Production Snapshot
+## Retrato Atual de Produção
 
-- Public URL: `https://chat.grupototum.com/chat`
-- Expected local upstream on Hostinger: `127.0.0.1:3210`
-- Reverse proxy: Nginx config extracted from `/etc/nginx/conf.d/domains/chat.grupototum.com.conf`
-- VPS config source discovered on 2026-05-13: `/home/totum/totum-chat`
-- Branding source: `/Users/israellemos/Documents/Claude/Projects/Totum OS/branding`
+- URL pública: `https://chat.grupototum.com/chat`
+- Upstream local esperado na Hostinger: `127.0.0.1:3210`
+- Proxy reverso: configuração Nginx extraída de `/etc/nginx/conf.d/domains/chat.grupototum.com.conf`
+- Fonte da configuração no VPS encontrada em 2026-05-13: `/home/totum/totum-chat`
+- Fonte dos assets de marca: `/Users/israellemos/Documents/Claude/Projects/Totum OS/branding`
 
-## Important Finding
+## Observação Importante
 
-On 2026-05-13, forcing `chat.grupototum.com` to the Hostinger IP returned `502 Bad Gateway`, while the public Cloudflare route returned HTTP 200. The Hostinger VPS has a historical config directory at `/home/totum/totum-chat`, but no running process was listening on `127.0.0.1:3210` during inventory. Treat this repository as the rebuild kit and verify Cloudflare origin/DNS before a cutover.
+Em 2026-05-13, o Nginx da Hostinger apontava `chat.grupototum.com` para `127.0.0.1:3210`, mas o container `totum-chat` não existia/estava parado; por isso a origem retornava `502 Bad Gateway`. O container foi recriado, subiu saudável em `127.0.0.1:3210`, e as rotas local, origem Nginx e pública passaram a responder HTTP 200.
 
-## VPS Files Still To Extract
+## Arquivos Extraídos do VPS
 
-The following files exist in `/home/totum/totum-chat` and should be versioned in a follow-up once SSH is stable again:
+Os arquivos abaixo foram extraídos de `/home/totum/totum-chat` em 2026-05-13 e versionados após varredura de segredos:
 
 - `agents-index.json`
 - `public/agents-index.json`
 - `src/alexandria-integration.js`
 - `setup.sh`
 
-Use [VPS Extraction Checklist](docs/VPS_EXTRACTION.md) before treating this repository as a complete production rebuild source.
+Use o [Checklist de Extração do VPS](docs/VPS_EXTRACTION.md) para repetir a conferência antes de qualquer novo deploy.
 
-## Docs
+## Documentação
 
 - [Deploy](docs/DEPLOY.md)
 - [Backup](docs/BACKUP.md)
-- [Alexandria Plugin](docs/PLUGIN_ALEXANDRIA.md)
+- [Plugin Alexandria](docs/PLUGIN_ALEXANDRIA.md)
 - [Branding](branding/README.md)
-- [VPS Extraction Checklist](docs/VPS_EXTRACTION.md)
+- [Localização PT-BR](docs/LOCALIZACAO_PT_BR.md)
+- [Checklist de Extração do VPS](docs/VPS_EXTRACTION.md)
