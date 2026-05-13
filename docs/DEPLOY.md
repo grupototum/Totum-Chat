@@ -18,6 +18,7 @@ cp .env.example .env
 Edit `.env` with real values. Do not commit it.
 
 ```bash
+sh scripts/validate-env.sh .env
 docker compose pull
 docker compose up -d
 docker compose ps
@@ -34,9 +35,11 @@ systemctl reload nginx
 Validate:
 
 ```bash
+sh scripts/validate-env.sh .env
 curl -I https://chat.grupototum.com
 curl -L https://chat.grupototum.com/chat
 docker inspect -f '{{.State.Health.Status}}' totum-chat
+sh scripts/healthcheck-wrapper.sh https://chat.grupototum.com/chat
 ```
 
 ## Production Note From 2026-05-13
@@ -51,3 +54,5 @@ Historical VPS config was found at `/home/totum/totum-chat` with:
 - `public/agents-index.json`
 - `src/alexandria-integration.js`
 - `setup.sh`
+
+Follow `docs/VPS_EXTRACTION.md` to recover and sanitize those files before declaring this repository a complete production rebuild source.

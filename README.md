@@ -25,9 +25,12 @@ The following files exist in `/home/totum/totum-chat` and should be versioned in
 - `src/alexandria-integration.js`
 - `setup.sh`
 
+Use [VPS Extraction Checklist](docs/VPS_EXTRACTION.md) before treating this repository as a complete production rebuild source.
+
 ## Docs
 
 - [Deploy](docs/DEPLOY.md)
 - [Backup](docs/BACKUP.md)
 - [Alexandria Plugin](docs/PLUGIN_ALEXANDRIA.md)
 - [Branding](branding/README.md)
+- [VPS Extraction Checklist](docs/VPS_EXTRACTION.md)

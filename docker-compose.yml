@@ -1,6 +1,6 @@
 services:
   totum-chat:
-    image: lobehub/lobe-chat:latest
+    image: lobehub/lobe-chat:${LOBE_CHAT_IMAGE_TAG:?Set LOBE_CHAT_IMAGE_TAG in .env to a validated LobeChat release or digest}
     container_name: totum-chat
     restart: unless-stopped
     ports:
@@ -13,8 +13,9 @@ services:
       - ./branding/favicon.ico:/app/public/favicon.ico:ro
       - ./branding/logo.png:/app/public/logo.png:ro
       - ./branding/apple-touch-icon.png:/app/public/apple-touch-icon.png:ro
+      - ./scripts/healthcheck-wrapper.sh:/usr/local/bin/totum-chat-healthcheck:ro
     healthcheck:
-      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://127.0.0.1:3210/chat || exit 1"]
+      test: ["CMD-SHELL", "/usr/local/bin/totum-chat-healthcheck http://127.0.0.1:3210/chat"]
       interval: 30s
       timeout: 10s
       retries: 5
